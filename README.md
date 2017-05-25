@@ -9,4 +9,6 @@ Then to add and commit changes to your branch use: git add/commit/push w/ name o
 
 Use git status to check on your branch and see what branch you are on
 
-Then to get onto the master you better make a pull request fool.
+Then to get onto the master you better make a pull request fool. 
+
+To merge master into your branch: git merge master
