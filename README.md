@@ -12,3 +12,6 @@ Use git status to check on your branch and see what branch you are on
 Then to get onto the master you better make a pull request fool. 
 
 To merge master into your branch: git merge master
+
+Check this out! https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+
