@@ -18,5 +18,7 @@ To merge master into your branch: git merge master
 Check this out! https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
 
 Font: 
+
 Add this to html: `<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow" rel="stylesheet">`
+
 Add this to css: `font-family: 'Pragati Narrow', sans-serif;`
