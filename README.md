@@ -1,5 +1,3 @@
-# Sup guys
-#I'm here
 # How to make a new branch
 First create the branch w/ this command: git branch branch-name
 
