@@ -20,3 +20,9 @@ Font:
 Add this to html: `<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow" rel="stylesheet">`
 
 Add this to css: `font-family: 'Pragati Narrow', sans-serif;`
+
+# How to test out React stuff
+1. Run `npm install`
+2. Run `npm run dev`
+3. Go to `localhost:8080/react.html` in a browser
+4. Make dope components
