@@ -1,9 +1,5 @@
 import * as React from 'react';
-
-export interface IPitcherModel {
-    name: string;
-    amount: number;
-}
+import { IPitcherModel } from '../models/IPitcherModel';
 
 export class Pitcher extends React.Component<IPitcherModel, undefined> {
     render() {

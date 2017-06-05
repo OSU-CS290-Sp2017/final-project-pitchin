@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Pitcher, IPitcherModel } from "./pitcher";
+import { Pitcher } from "./pitcher";
+import { IPitcherModel} from "../models/IPitcherModel";
 
 export interface IPitchBoxModel {
     name: string;
