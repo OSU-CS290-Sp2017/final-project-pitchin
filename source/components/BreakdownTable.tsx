@@ -13,9 +13,9 @@ export class BreakdownTable extends React.Component<IBreakdownTableProps, undefi
     render() {
         const debtsContents = this.props.debts.map((debt, index) => {
             return (
-            <tr className="debts-table-row">
+            <tr className="debts-table-row" key={index}>
                 <td className="debts-table-name">{debt.name}</td>
-                <td>${debt.amount.toFixed(2)}</td>
+                <td className="debts-table-amount">${debt.amount.toFixed(2)}</td>
             </tr>)
         });
         return (

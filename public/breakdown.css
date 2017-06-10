@@ -5,17 +5,50 @@ body {
 
 .debts-table {
     border: 0px;
-    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto;
+    border-radius: 7px;
+    overflow: hidden;
 }
 
 .debts-table-row:nth-child(even) {
     background-color: #ddd;
 }
 
+.debts-table-row:nth-child(odd) {
+    background-color: #eee;
+}
+
 .debts-table-row > td {
-    padding: 5px;
+    padding: 5px 10px;
 }
 
 .debts-table-name {
     padding-right: 50px !important;
+}
+
+.debts-table-amount {
+    text-align: right;
+}
+
+.breakdown-header {
+    color: #74D38F;
+    margin-bottom: 10px;
+}
+
+.breakdown-section {
+    padding: 30px;
+}
+
+.breakdown-summary {
+    background-color: #eee;
+    padding: 20px 60px;
+    border-radius: 7px;
+}
+
+.breakdown-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
