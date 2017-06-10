@@ -1,0 +1,21 @@
+body {
+    font-family:  Segoe UI, sans-serif;
+    font-size: 16px;
+}
+
+.debts-table {
+    border: 0px;
+    border-collapse: collapse;
+}
+
+.debts-table-row:nth-child(even) {
+    background-color: #ddd;
+}
+
+.debts-table-row > td {
+    padding: 5px;
+}
+
+.debts-table-name {
+    padding-right: 50px !important;
+}

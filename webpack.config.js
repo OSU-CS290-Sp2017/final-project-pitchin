@@ -3,9 +3,12 @@
 var path = require('path');
 
 module.exports = {
-    entry: "./source/index.tsx",
+    entry: {
+        index: "./source/index.tsx",
+        breakdown: "./source/breakdown.tsx"
+    },
     output: {
-        filename: "bundle.js",
+        filename: "[name].js",
         path: path.resolve(__dirname, "public/")
     },
 
