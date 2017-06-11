@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
         filename: "[name].js",
-        path: path.resolve(__dirname, "public/")
+        path: path.resolve(__dirname, "public/compiled-js/")
     },
 
     // Enable sourcemaps for debugging webpack's output.
