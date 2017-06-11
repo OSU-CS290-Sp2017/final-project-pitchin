@@ -33,11 +33,12 @@ body {
 
 .breakdown-header {
     color: #74D38F;
-    margin-bottom: 10px;
+    margin: 10px;
+
 }
 
 .breakdown-section {
-    padding: 30px;
+    margin: 20px;
 }
 
 .breakdown-summary {
