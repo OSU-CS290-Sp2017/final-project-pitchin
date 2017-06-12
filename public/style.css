@@ -5,9 +5,13 @@
 body{
 	display: flex;
 	flex-direction: column;
+	align-items: stretch;
 
 }
+.active{
+	background-color: red;
 
+}
 .pitch-area{
 	background-color: #F6FFF8;
 	flex-grow: 1;
@@ -16,11 +20,14 @@ body{
 	flex-direction: row;
 	justify-content: space-around;
 
+/*	flex-wrap: wrap;*/
+	align-items: stretch;
 	flex-wrap: wrap;
-	
+	align-self: stretch;	
 }
 
 .pitch-container{
+/*	align-self: stretch;*/
  	flex: 1 0 28%;
 	min-width: 400px;
 	background-color: #DBF2D0;
@@ -32,4 +39,7 @@ body{
 }
 .pitch{
 	background-color: red;
+}
+.hello-world {
+    font-family: sans-serif;
 }
