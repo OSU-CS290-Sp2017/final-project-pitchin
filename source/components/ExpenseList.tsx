@@ -4,10 +4,11 @@ import { PitchBox } from './pitchbox';
 import { IPitchBoxModel } from '../models/IPitchBoxModel';
 
 interface IExpenses {
+    name: string;
     expenses: IPitchBoxModel[];
 }
 
-export class PitchPage extends React.Component<IExpenses, undefined> {
+export class ExpenseList extends React.Component<IExpenses, undefined> {
     render() {
         const expensesJSX = this.props.expenses.map((expense) => {
             return(<PitchBox 
@@ -19,6 +20,7 @@ export class PitchPage extends React.Component<IExpenses, undefined> {
 
         return (
             <div>
+                <h2 className="breakdown-header">{this.props.name}</h2>
                 {expensesJSX}
             </div>
         );

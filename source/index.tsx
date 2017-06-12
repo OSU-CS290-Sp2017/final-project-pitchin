@@ -1,25 +1,47 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-//import our component we made in the other hellocomponent.tsx file
-import { PitchPage } from "./components/pitchpage";
-//import { IPitcherModel } from "./components/pitcher";
+import { ExpensePage, IExpensePageModel } from './components/expensepage';
+import { IPitcherModel } from "./models/IPitcherModel";
 
-//this call renders the top level component (in this case the PitchBox) to the DOM
-//we have to give it a place to render to, so we pass in a div with id="example"
-//you can use your components just like html elements, with the properties as attributes
+interface IExpense {
+    name: string;
+    amount: number;
+    message: string;
+    category: string;
+    pitchers: IPitcherModel[];
+}
 
-//test data: 
-const pitchers = [ {
-        name: "Daniel Grocki",
-        amount: 4.20
-    }, {
-        name: "Zoe Stein-Hansen",
-        amount: 3.30
+function loadPitchData() {
+    var getReq = new XMLHttpRequest();
+    getReq.open("GET", "./getexpenses");
+    getReq.onload = (ev) => {
+        onDataLoaded(getReq.responseText);
     }
-];
+}
 
-ReactDOM.render(
-    <PitchPage expenses={} />,
-    document.getElementById("pitchbox-example")
-);
+function onDataLoaded(body: string) {
+    const json = JSON.parse(body);
+    const expenses = separateExpenses(json);
+    ReactDOM.render(
+        <ExpensePage groceries={expenses.groceries} utilities={expenses.utilities} other={expenses.other} />,
+        document.getElementById("dynamic-pitches"));
+}
+
+function separateExpenses(data: IExpense[]): IExpensePageModel {
+    const groceries = data.filter((expense) => {
+        expense.category == "G";
+    });
+    const misc = data.filter((expense) => {
+        expense.category == "M";
+    });
+    const utils = data.filter((expense) => {
+        expense.category == "U";
+    });
+    
+    return {
+        groceries: groceries, 
+        other: misc,
+        utilities: utils
+    };
+}
