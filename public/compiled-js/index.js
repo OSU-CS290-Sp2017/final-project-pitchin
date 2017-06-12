@@ -187,13 +187,21 @@ var PitchBox = (function (_super) {
                 name: "New Pitcher",
                 amount: _this.props.amount / (_this.props.pitchers.length + 1)
             };
-            var newState = __assign({}, _this.state, { pitched: true, pitchers: _this.state.pitchers.concat([newPitcher]) });
+            var pitchers = _this.state.pitchers.map(function (p) {
+                p.amount = _this.props.amount / (_this.props.pitchers.length + 1);
+                return p;
+            });
+            pitchers = pitchers.concat(newPitcher);
+            var newState = __assign({}, _this.state, { pitched: true, pitchers: pitchers });
             _this.setState(newState);
         };
         _this.togglePitchers = function () {
             var newState = __assign({}, _this.state, { showPitchers: !_this.state.showPitchers });
             _this.setState(newState);
         };
+        var pitchers = props.pitchers.forEach(function (p) {
+            p.amount = props.amount / props.pitchers.length;
+        });
         _this.state = {
             pitched: false,
             pitchers: props.pitchers,
