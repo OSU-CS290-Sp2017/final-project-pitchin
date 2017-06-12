@@ -278,6 +278,7 @@ function loadPitchData() {
     getReq.onload = function (ev) {
         onDataLoaded(getReq.responseText);
     };
+    getReq.send();
 }
 function onDataLoaded(body) {
     var json = JSON.parse(body);
@@ -286,13 +287,13 @@ function onDataLoaded(body) {
 }
 function separateExpenses(data) {
     var groceries = data.filter(function (expense) {
-        expense.category == "G";
+        return expense.category == "G";
     });
     var misc = data.filter(function (expense) {
-        expense.category == "M";
+        return expense.category == "M";
     });
     var utils = data.filter(function (expense) {
-        expense.category == "U";
+        return expense.category == "U";
     });
     return {
         groceries: groceries,
@@ -300,6 +301,7 @@ function separateExpenses(data) {
         utilities: utils
     };
 }
+loadPitchData();
 
 
 /***/ }),

@@ -18,6 +18,7 @@ function loadPitchData() {
     getReq.onload = (ev) => {
         onDataLoaded(getReq.responseText);
     }
+    getReq.send();
 }
 
 function onDataLoaded(body: string) {
@@ -30,13 +31,13 @@ function onDataLoaded(body: string) {
 
 function separateExpenses(data: IExpense[]): IExpensePageModel {
     const groceries = data.filter((expense) => {
-        expense.category == "G";
+        return expense.category == "G";
     });
     const misc = data.filter((expense) => {
-        expense.category == "M";
+        return expense.category == "M";
     });
     const utils = data.filter((expense) => {
-        expense.category == "U";
+        return expense.category == "U";
     });
     
     return {
@@ -45,3 +46,5 @@ function separateExpenses(data: IExpense[]): IExpensePageModel {
         utilities: utils
     };
 }
+
+loadPitchData();
