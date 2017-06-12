@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 //import our component we made in the other hellocomponent.tsx file
-import { PitchBox } from "./components/pitchbox";
+import { PitchPage } from "./components/pitchpage";
 //import { IPitcherModel } from "./components/pitcher";
 
 //this call renders the top level component (in this case the PitchBox) to the DOM
@@ -20,6 +20,6 @@ const pitchers = [ {
 ];
 
 ReactDOM.render(
-    <PitchBox name="Brooks" amount={25.30} message="Test message" pitchers={pitchers} />,
+    <PitchPage expenses={} />,
     document.getElementById("pitchbox-example")
 );
