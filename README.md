@@ -21,10 +21,15 @@ Add this to html: `<link href="https://fonts.googleapis.com/css?family=Pragati+N
 
 Add this to css: `font-family: 'Pragati Narrow', sans-serif;`
 
-# How to test out React stuff
+# How to compile React stuff
+This is only if you want to add/edit react components. Otherwise, you can just open `react.html` in a browser from your file explorer. 
+
+## Set it up to compile everytime you save a file
 You have to do this on your local computer, not on putty!
 1. Run `npm install`
 2. Run `npm run dev`
 3. Go to `localhost:8080/react.html` in a browser
 4. Make dope components
 
+## Compile manually
+Run `webpack`
