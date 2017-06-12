@@ -17,7 +17,7 @@ body {
     border-radius: 100%;
     width: 100px;
     min-width: 100px;
-    height: 100px; 
+    height: 100px;
     line-height: 100px;
     text-align: center;
     font-size: 20px;
@@ -36,7 +36,7 @@ body {
     justify-content: flex-end;
     flex-wrap: wrap;
     margin-bottom: 3px;
-} 
+}
 
 .pitch-name {
     font-weight: bold;
