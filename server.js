@@ -50,7 +50,7 @@ app.get("/getExpenses", function(req,res,next){
 			message: pitch.message,
 			amount: pitch.amount,
 			pitchers: pitchers,
-			message: pitch.message 
+			category: category.message 
 		}
 	});	
 	res.status(200).send(JSON.stringify(new_obj));
