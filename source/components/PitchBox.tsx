@@ -1,13 +1,7 @@
 import * as React from "react";
 import { Pitcher } from "./pitcher";
-import { IPitcherModel} from "../models/IPitcherModel";
-
-export interface IPitchBoxModel {
-    name: string;
-    amount: number;
-    message: string;
-    pitchers: IPitcherModel[];
-}
+import { IPitcherModel } from "../models/IPitcherModel";
+import { IPitchBoxModel } from "../models/IPitchBoxModel"
 
 interface IPitchBoxState {
     pitched: boolean;
