@@ -63,12 +63,96 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 27);
 /******/ })
 /************************************************************************/
 /******/ ({
 
+/***/ 2:
+/***/ (function(module, exports) {
+
+module.exports = React;
+
+/***/ }),
+
 /***/ 21:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(2);
+var expenselist_1 = __webpack_require__(24);
+var ExpensePage = (function (_super) {
+    __extends(ExpensePage, _super);
+    function ExpensePage() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ExpensePage.prototype.render = function () {
+        return (React.createElement("div", { className: "pitch-area" },
+            React.createElement("div", { classID: "groceries", className: "pitch-container" },
+                React.createElement(expenselist_1.ExpenseList, { expenses: this.props.groceries, name: "Groceries" })),
+            React.createElement("div", { classID: "utilities", className: "pitch-container" },
+                React.createElement(expenselist_1.ExpenseList, { expenses: this.props.utilities, name: "Utilities" })),
+            React.createElement("div", { classID: "misc", className: "pitch-container" },
+                React.createElement(expenselist_1.ExpenseList, { expenses: this.props.other, name: "Miscellaneous" }))));
+    };
+    return ExpensePage;
+}(React.Component));
+exports.ExpensePage = ExpensePage;
+
+
+/***/ }),
+
+/***/ 24:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(2);
+var pitchbox_1 = __webpack_require__(25);
+var ExpenseList = (function (_super) {
+    __extends(ExpenseList, _super);
+    function ExpenseList() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ExpenseList.prototype.render = function () {
+        var expensesJSX = this.props.expenses.map(function (expense) {
+            return (React.createElement(pitchbox_1.PitchBox, { name: expense.name, amount: expense.amount, pitchers: expense.pitchers, message: expense.message }));
+        });
+        return (React.createElement("div", null,
+            React.createElement("h2", { className: "breakdown-header" }, this.props.name),
+            expensesJSX));
+    };
+    return ExpenseList;
+}(React.Component));
+exports.ExpenseList = ExpenseList;
+
+
+/***/ }),
+
+/***/ 25:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -92,8 +176,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(3);
-var pitcher_1 = __webpack_require__(24);
+var React = __webpack_require__(2);
+var pitcher_1 = __webpack_require__(26);
 var PitchBox = (function (_super) {
     __extends(PitchBox, _super);
     function PitchBox(props) {
@@ -143,7 +227,7 @@ exports.PitchBox = PitchBox;
 
 /***/ }),
 
-/***/ 24:
+/***/ 26:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -159,7 +243,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(3);
+var React = __webpack_require__(2);
 var Pitcher = (function (_super) {
     __extends(Pitcher, _super);
     function Pitcher() {
@@ -179,38 +263,44 @@ exports.Pitcher = Pitcher;
 
 /***/ }),
 
-/***/ 25:
+/***/ 27:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(3);
+var React = __webpack_require__(2);
 var ReactDOM = __webpack_require__(6);
-//import our component we made in the other hellocomponent.tsx file
-var pitchbox_1 = __webpack_require__(21);
-//import { IPitcherModel } from "./components/pitcher";
-//this call renders the top level component (in this case the PitchBox) to the DOM
-//we have to give it a place to render to, so we pass in a div with id="example"
-//you can use your components just like html elements, with the properties as attributes
-//test data: 
-var pitchers = [{
-        name: "Daniel Grocki",
-        amount: 4.20
-    }, {
-        name: "Zoe Stein-Hansen",
-        amount: 3.30
-    }
-];
-ReactDOM.render(React.createElement(pitchbox_1.PitchBox, { name: "Brooks", amount: 25.30, message: "Test message", pitchers: pitchers }), document.getElementById("pitchbox-example"));
+var expensepage_1 = __webpack_require__(21);
+function loadPitchData() {
+    var getReq = new XMLHttpRequest();
+    getReq.open("GET", "./getexpenses");
+    getReq.onload = function (ev) {
+        onDataLoaded(getReq.responseText);
+    };
+}
+function onDataLoaded(body) {
+    var json = JSON.parse(body);
+    var expenses = separateExpenses(json);
+    ReactDOM.render(React.createElement(expensepage_1.ExpensePage, { groceries: expenses.groceries, utilities: expenses.utilities, other: expenses.other }), document.getElementById("dynamic-pitches"));
+}
+function separateExpenses(data) {
+    var groceries = data.filter(function (expense) {
+        expense.category == "G";
+    });
+    var misc = data.filter(function (expense) {
+        expense.category == "M";
+    });
+    var utils = data.filter(function (expense) {
+        expense.category == "U";
+    });
+    return {
+        groceries: groceries,
+        other: misc,
+        utilities: utils
+    };
+}
 
-
-/***/ }),
-
-/***/ 3:
-/***/ (function(module, exports) {
-
-module.exports = React;
 
 /***/ }),
 
