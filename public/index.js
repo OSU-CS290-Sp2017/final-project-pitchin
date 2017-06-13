@@ -32,3 +32,10 @@ var memContainer = document.getElementById('member-container');
 memContainer.addEventListener('click', delegatedListener);	//listen for clicks on our member box, and then use delegated listener to pick exact members
 
 //////*********************************************////////
+
+
+
+
+
+
+
