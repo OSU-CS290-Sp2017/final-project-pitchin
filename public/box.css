@@ -15,14 +15,14 @@ body {
 .pitch-money-box {
     background-color: #74D38F;
     border-radius: 100%;
-    width: 100px;
-    min-width: 100px;
-    height: 100px; 
-    line-height: 100px;
+    width: 75px;
+    min-width: 75px;
+    height: 75px; 
+    line-height: 75px;
     text-align: center;
     font-size: 20px;
     color: #FFFFFF;
-    align-self: center;
+    align-self: center; 
 }
 
 .pitch-content {
@@ -75,8 +75,9 @@ body {
     color: #FFFFFF;
     border: 0px;
     font-family: 'Pragati Narrow';
-    font-size: 18px;
+    font-size: 12px;
     float: right;
+	 
 }
 
 .pitch-in-button:hover {
