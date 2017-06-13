@@ -187,13 +187,21 @@ var PitchBox = (function (_super) {
                 name: "New Pitcher",
                 amount: _this.props.amount / (_this.props.pitchers.length + 1)
             };
-            var newState = __assign({}, _this.state, { pitched: true, pitchers: _this.state.pitchers.concat([newPitcher]) });
+            var pitchers = _this.state.pitchers.map(function (p) {
+                p.amount = _this.props.amount / (_this.props.pitchers.length + 1);
+                return p;
+            });
+            pitchers = pitchers.concat(newPitcher);
+            var newState = __assign({}, _this.state, { pitched: true, pitchers: pitchers });
             _this.setState(newState);
         };
         _this.togglePitchers = function () {
             var newState = __assign({}, _this.state, { showPitchers: !_this.state.showPitchers });
             _this.setState(newState);
         };
+        var pitchers = props.pitchers.forEach(function (p) {
+            p.amount = props.amount / props.pitchers.length;
+        });
         _this.state = {
             pitched: false,
             pitchers: props.pitchers,
@@ -278,6 +286,7 @@ function loadPitchData() {
     getReq.onload = function (ev) {
         onDataLoaded(getReq.responseText);
     };
+    getReq.send();
 }
 function onDataLoaded(body) {
     var json = JSON.parse(body);
@@ -286,13 +295,13 @@ function onDataLoaded(body) {
 }
 function separateExpenses(data) {
     var groceries = data.filter(function (expense) {
-        expense.category == "G";
+        return expense.category == "G";
     });
     var misc = data.filter(function (expense) {
-        expense.category == "M";
+        return expense.category == "M";
     });
     var utils = data.filter(function (expense) {
-        expense.category == "U";
+        return expense.category == "U";
     });
     return {
         groceries: groceries,
@@ -300,6 +309,7 @@ function separateExpenses(data) {
         utilities: utils
     };
 }
+loadPitchData();
 
 
 /***/ }),

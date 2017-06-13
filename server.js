@@ -5,7 +5,7 @@
 var path = require('path');
 var fs = require('fs');
 var express = require('express');
-var exphbs = require('express-handlebars');
+//var exphbs = require('express-handlebars');
 
 var people = require('./peopleExamples');
 var pitches = require("./pitchExamples")
@@ -33,16 +33,20 @@ app.get('/', function (req, res, next) {
 	
 });
 */
+});
+
 app.get("/getExpenses", function(req,res,next){
+	console.log("get expenses req");
 	var new_obj = pitches.map(function(pitch){
 		var name = people.find(function(person) {
 			return person.ID == pitch.posterID;
 		}).name;
 		var pitchers = pitch.contributors.map(function(c) {
-			return {
-				name: people.find(function(person){
+			const n = people.find(function(person){
 				return person.ID == c.ID;
 				}).name;
+			return {
+				name: n
 			};
 		});
 		return {
@@ -50,7 +54,7 @@ app.get("/getExpenses", function(req,res,next){
 			message: pitch.message,
 			amount: pitch.amount,
 			pitchers: pitchers,
-			category: category.message 
+			category: pitch.category 
 		}
 	});	
 	res.status(200).send(JSON.stringify(new_obj));
