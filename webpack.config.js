@@ -3,10 +3,13 @@
 var path = require('path');
 
 module.exports = {
-    entry: "./source/index.tsx",
+    entry: {
+        index: "./source/index.tsx",
+        breakdown: "./source/breakdown.tsx"
+    },
     output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "public/")
+        filename: "[name].js",
+        path: path.resolve(__dirname, "public/compiled-js/")
     },
 
     // Enable sourcemaps for debugging webpack's output.

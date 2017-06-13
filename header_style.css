@@ -1,0 +1,37 @@
+/*
+ * Content: This file will contain the style for the header and the nav-bar
+ * Author: Chandler Petersen
+ * Date: 6/4/2017
+ */
+
+.title {
+	font-size: 30px;
+	font-weight: bold;
+	background-color:#74D38F;
+	/*color: #f6fff8;*/
+	color: red;
+	font-family: 'Pragati Narrow', sans-serif;
+	margin: 0px;
+	padding: 12px;
+}
+.navitem-main-item-navlink {
+	display: inline-block;
+}
+
+.navbar {
+	background-color: #f6fff8;
+  font-size: 18px;
+}
+
+.navlist {
+	/*display: flex;*/
+}
+
+.navitem {
+	/*display: flex; */
+
+}
+
+.member {
+
+}

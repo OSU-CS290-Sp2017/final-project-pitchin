@@ -2,23 +2,30 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Tweeter</title>
+    <title>Pitch In</title>
 
     <!-- This is a 3rd-party stylesheet for Font Awesome: http://fontawesome.io/ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen">
 
-    <link rel="stylesheet" href="style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="box.css"/>
+    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="header_style.css" media="screen">
+    <!-- <link rel="stylesheet" href="box.css" media="screen"> -->
 
+
+
+<!--	media="screen">	-->
+   
 </head>
 <body>
-    
+
 
 	<header>
-		<h1 class = "title">Pitch In!</h1>
+		<h1 class = "title">PitchIn</h1>
 		<ul>
-			<li class "navitem main-items navlink" ><a href = "#">Groups</a></li>
-			<li class "navitem main-items navlink" ><a href = "#">Breakdown</a></li>
-		
+			<li class = "navitem main-items navlink" ><a href = "#">Groups</a></li>
+			<li class = "navitem main-items navlink" ><a href = "#">Breakdown</a></li>
+
 		</ul>
 
 		<nav class = "navbar">
@@ -26,11 +33,11 @@
 				<!-- We may want to make some of these buttons....-->
 				<li class = "navitem">
 					<button>Add Charge</button>
-				</li>  
+				</li>
 				<li class = "navitem">Group Name</li>
 				<li class = "navitem">Members
-					<div class= "member-container">
-						<button class = "member">DG</button>
+					<div id= "member-container">
+						<button class = "member active">DG</button>
 						<button class = "member">BM</button>
 						<button class = "member">CP</button>
 						<button class = "member">ZS</button>
@@ -42,24 +49,36 @@
 
 
 
-	<main class = "pitch-container">
+	<main class = "pitch-area" id = "dynamic-pitches">
    
 
-		<div id="utilities" class= "pitch-container">Article Container</div>
+		<div id="utilities" class= "pitch-container">Article Container
     		
 			<article class= "pitch">A Pitch goes here</article>
+
+		</div>
 	
-		<div id= "groceries" class= "pitch-container">Groceries Container</div>
+		<div id= "groceries" class= "pitch-container">Groceries Container
     
-    		<article class= "pitch">A Pitch goes here</article>
+	    		<article class= "">
+	       			<div id="pitchbox-example"></div>
+			</article>
+
+		</div>
 	
-		<div id = "misc" class= "pitch-container">Misc Container</div>
+		<div id = "misc" class= "pitch-container">Misc Container
 
     		<article class= "pitch">A Pitch goes here</article>
+
+		</div>
 
 	</main>
 
 </body>
 <script src="index.js" charset="utf-8"></script>
+ <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <!--Main-->
+    <script src="compiled-js/index.js"></script>
 
 </html>
