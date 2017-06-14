@@ -3,14 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import { ExpensePage, IExpensePageModel } from './components/expensepage';
 import { IPitcherModel } from "./models/IPitcherModel";
-
-interface IExpense {
-    name: string;
-    amount: number;
-    message: string;
-    category: string;
-    pitchers: IPitcherModel[];
-}
+import { IExpense } from "./models/IExpense";
 
 function loadPitchData() {
     var getReq = new XMLHttpRequest();
@@ -23,28 +16,10 @@ function loadPitchData() {
 
 function onDataLoaded(body: string) {
     const json = JSON.parse(body);
-    const expenses = separateExpenses(json);
+    const expenses = json as IExpense[] || [];
     ReactDOM.render(
-        <ExpensePage groceries={expenses.groceries} utilities={expenses.utilities} other={expenses.other} />,
+        <ExpensePage expenses={expenses} />,
         document.getElementById("dynamic-pitches"));
-}
-
-function separateExpenses(data: IExpense[]): IExpensePageModel {
-    const groceries = data.filter((expense) => {
-        return expense.category == "G";
-    });
-    const misc = data.filter((expense) => {
-        return expense.category == "M";
-    });
-    const utils = data.filter((expense) => {
-        return expense.category == "U";
-    });
-    
-    return {
-        groceries: groceries, 
-        other: misc,
-        utilities: utils
-    };
 }
 
 loadPitchData();

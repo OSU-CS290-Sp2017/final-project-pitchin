@@ -15,7 +15,8 @@ export class ExpenseList extends React.Component<IExpenses, undefined> {
                 name={expense.name} 
                 amount={expense.amount} 
                 pitchers={expense.pitchers} 
-                message={expense.message} />)
+                message={expense.message}
+                id={expense.id} />)
         });
 
         return (
