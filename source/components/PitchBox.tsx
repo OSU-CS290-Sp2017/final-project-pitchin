@@ -2,7 +2,7 @@ import * as React from "react";
 import { Pitcher } from "./pitcher";
 import { IPitcherModel } from "../models/IPitcherModel";
 import { IPitchBoxModel } from "../models/IPitchBoxModel"
-import { getName } from "../GetName";
+import { Helpers } from "../helpers";
 
 interface IPitchBoxState {
     pitched: boolean;
@@ -13,11 +13,18 @@ interface IPitchBoxState {
 export class PitchBox extends React.Component<IPitchBoxModel, IPitchBoxState> {
     constructor(props: IPitchBoxModel) {
         super(props);
-        const pitchers = props.pitchers.forEach((p) => {
-            p.amount = props.amount / props.pitchers.length;
+        props.pitchers.forEach((p) => {
+            p.amount = props.amount / (props.pitchers.length + 1);
         });
+        var pitched = false;
+        props.pitchers.forEach((p) => {
+            if (p.name == Helpers.getName())
+                pitched = true;
+        })
+        if (props.name == Helpers.getName()) 
+            pitched = true;
         this.state = {
-            pitched: false,
+            pitched: pitched,
             pitchers: props.pitchers,
             showPitchers: false
         }
@@ -25,11 +32,11 @@ export class PitchBox extends React.Component<IPitchBoxModel, IPitchBoxState> {
 
     onPitchInClicked = () => {
         const newPitcher = {
-            name: getName(),
-            amount: this.props.amount / (this.props.pitchers.length + 1)
+            name: Helpers.getName(),
+            amount: this.props.amount / (this.props.pitchers.length + 2)
         };
         var pitchers = this.state.pitchers.map((p) => {
-            p.amount = this.props.amount / (this.props.pitchers.length + 1);
+            p.amount = this.props.amount / (this.props.pitchers.length + 2);
             return p;
         });
         pitchers = pitchers.concat(newPitcher);
@@ -39,6 +46,14 @@ export class PitchBox extends React.Component<IPitchBoxModel, IPitchBoxState> {
             pitchers: pitchers
         };
         this.setState(newState);
+        this.savePitchin(newPitcher);
+    }
+
+    savePitchin(pitcher: IPitcherModel) {
+        var postReq = new XMLHttpRequest();
+        postReq.open('POST', './addpitcher/expense/' + this.props.id);
+        postReq.setRequestHeader('Content-Type', 'application/json');
+        postReq.send(JSON.stringify(pitcher));
     }
 
     togglePitchers = () => {

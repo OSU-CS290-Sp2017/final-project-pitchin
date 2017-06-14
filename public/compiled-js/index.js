@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 29);
+/******/ 	return __webpack_require__(__webpack_require__.s = 30);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -92,13 +92,40 @@ module.exports = ReactDOM;
 /* 12 */,
 /* 13 */,
 /* 14 */,
-/* 15 */,
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Helpers = (function () {
+    function Helpers() {
+    }
+    Helpers.getName = function () {
+        var initials = document.getElementsByClassName('active')[0].textContent;
+        if (initials == 'BM')
+            return 'Brooks';
+        if (initials == 'CP')
+            return 'Chandler';
+        if (initials == 'DG')
+            return 'Daniel';
+        if (initials == 'ZS')
+            return 'Zoe';
+        return '';
+    };
+    return Helpers;
+}());
+exports.Helpers = Helpers;
+
+
+/***/ }),
 /* 16 */,
 /* 17 */,
 /* 18 */,
 /* 19 */,
 /* 20 */,
-/* 21 */
+/* 21 */,
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -123,8 +150,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
-var expenselist_1 = __webpack_require__(26);
-var addexpensemodal_1 = __webpack_require__(24);
+var expenselist_1 = __webpack_require__(27);
+var addexpensemodal_1 = __webpack_require__(25);
 var ExpensePage = (function (_super) {
     __extends(ExpensePage, _super);
     function ExpensePage(props) {
@@ -134,17 +161,27 @@ var ExpensePage = (function (_super) {
             _this.setState(newState);
         };
         _this.addExpense = function (expense) {
-            //TODO: post back to API
             var newState = __assign({}, _this.state, { expenses: _this.state.expenses.concat([expense]), addModalVisible: !_this.state.addModalVisible });
             _this.setState(newState);
+            _this.saveExpense(expense);
         };
         _this.state = {
             addModalVisible: false,
             expenses: props.expenses
         };
         document.getElementById("add-expense-button").onclick = _this.toggleAddModalVisible;
+        document.getElementById("DG").onclick = function () { _this.forceUpdate(); };
+        document.getElementById("BM").onclick = function () { _this.forceUpdate(); };
+        document.getElementById("ZS").onclick = function () { _this.forceUpdate(); };
+        document.getElementById("CP").onclick = function () { _this.forceUpdate(); };
         return _this;
     }
+    ExpensePage.prototype.saveExpense = function (expense) {
+        var postReq = new XMLHttpRequest();
+        postReq.open('POST', './addexpense');
+        postReq.setRequestHeader('Content-Type', 'application/json');
+        postReq.send(JSON.stringify(expense));
+    };
     ExpensePage.prototype.separateExpenses = function (data) {
         var groceries = data.filter(function (expense) {
             return expense.category == "G";
@@ -179,8 +216,8 @@ exports.ExpensePage = ExpensePage;
 
 
 /***/ }),
-/* 22 */,
-/* 23 */
+/* 23 */,
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -229,7 +266,7 @@ exports.SegmentButton = SegmentButton;
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -254,8 +291,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
-var IExpense_1 = __webpack_require__(30);
-var SegmentButton_1 = __webpack_require__(23);
+var IExpense_1 = __webpack_require__(31);
+var SegmentButton_1 = __webpack_require__(24);
+var helpers_1 = __webpack_require__(15);
 var AddExpenseModal = (function (_super) {
     __extends(AddExpenseModal, _super);
     function AddExpenseModal(props) {
@@ -289,14 +327,23 @@ var AddExpenseModal = (function (_super) {
             _this.setState(newState);
         };
         _this.state = {
-            name: "Name",
+            name: helpers_1.Helpers.getName(),
             amount: 0,
             message: "",
             pitchers: [],
-            category: IExpense_1.ExpenseCategory.Utilities
+            category: IExpense_1.ExpenseCategory.Utilities,
+            id: -1
         };
         return _this;
     }
+    AddExpenseModal.prototype.resetForm = function () {
+        var newState = __assign({}, this.state, { name: helpers_1.Helpers.getName(), amount: 0, message: "", category: IExpense_1.ExpenseCategory.Utilities });
+        this.setState(newState);
+    };
+    AddExpenseModal.prototype.onOkClicked = function () {
+        var newExpense = __assign({}, this.state, { name: helpers_1.Helpers.getName() });
+        this.props.onSubmit(newExpense);
+    };
     AddExpenseModal.prototype.render = function () {
         var _this = this;
         return (React.createElement("div", { className: this.props.visible ? "modal-backdrop" : "hidden" },
@@ -312,7 +359,10 @@ var AddExpenseModal = (function (_super) {
                         React.createElement("input", { className: "input-message", type: "text", onChange: this.onMessageChange, value: this.state.message, placeholder: "Message..." }))),
                 React.createElement("div", { className: "modal-footer" },
                     React.createElement("button", { className: "button", onClick: this.props.onCancel }, "Cancel"),
-                    React.createElement("button", { className: "button button-highlighted modal-button-add", onClick: function () { return _this.props.onSubmit(_this.state); } }, "Add")))));
+                    React.createElement("button", { className: "button button-highlighted modal-button-add", onClick: function () {
+                            _this.onOkClicked();
+                            _this.resetForm();
+                        } }, "Add")))));
     };
     return AddExpenseModal;
 }(React.Component));
@@ -320,8 +370,8 @@ exports.AddExpenseModal = AddExpenseModal;
 
 
 /***/ }),
-/* 25 */,
-/* 26 */
+/* 26 */,
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -338,7 +388,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
-var pitchbox_1 = __webpack_require__(27);
+var pitchbox_1 = __webpack_require__(28);
 var ExpenseList = (function (_super) {
     __extends(ExpenseList, _super);
     function ExpenseList() {
@@ -346,7 +396,7 @@ var ExpenseList = (function (_super) {
     }
     ExpenseList.prototype.render = function () {
         var expensesJSX = this.props.expenses.map(function (expense) {
-            return (React.createElement(pitchbox_1.PitchBox, { name: expense.name, amount: expense.amount, pitchers: expense.pitchers, message: expense.message }));
+            return (React.createElement(pitchbox_1.PitchBox, { name: expense.name, amount: expense.amount, pitchers: expense.pitchers, message: expense.message, id: expense.id }));
         });
         return (React.createElement("div", null,
             React.createElement("h2", { className: "breakdown-header" }, this.props.name),
@@ -358,7 +408,7 @@ exports.ExpenseList = ExpenseList;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -383,38 +433,53 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
-var pitcher_1 = __webpack_require__(28);
+var pitcher_1 = __webpack_require__(29);
+var helpers_1 = __webpack_require__(15);
 var PitchBox = (function (_super) {
     __extends(PitchBox, _super);
     function PitchBox(props) {
         var _this = _super.call(this, props) || this;
         _this.onPitchInClicked = function () {
             var newPitcher = {
-                name: "New Pitcher",
-                amount: _this.props.amount / (_this.props.pitchers.length + 1)
+                name: helpers_1.Helpers.getName(),
+                amount: _this.props.amount / (_this.props.pitchers.length + 2)
             };
             var pitchers = _this.state.pitchers.map(function (p) {
-                p.amount = _this.props.amount / (_this.props.pitchers.length + 1);
+                p.amount = _this.props.amount / (_this.props.pitchers.length + 2);
                 return p;
             });
             pitchers = pitchers.concat(newPitcher);
             var newState = __assign({}, _this.state, { pitched: true, pitchers: pitchers });
             _this.setState(newState);
+            _this.savePitchin(newPitcher);
         };
         _this.togglePitchers = function () {
             var newState = __assign({}, _this.state, { showPitchers: !_this.state.showPitchers });
             _this.setState(newState);
         };
-        var pitchers = props.pitchers.forEach(function (p) {
-            p.amount = props.amount / props.pitchers.length;
+        props.pitchers.forEach(function (p) {
+            p.amount = props.amount / (props.pitchers.length + 1);
         });
+        var pitched = false;
+        props.pitchers.forEach(function (p) {
+            if (p.name == helpers_1.Helpers.getName())
+                pitched = true;
+        });
+        if (props.name == helpers_1.Helpers.getName())
+            pitched = true;
         _this.state = {
-            pitched: false,
+            pitched: pitched,
             pitchers: props.pitchers,
             showPitchers: false
         };
         return _this;
     }
+    PitchBox.prototype.savePitchin = function (pitcher) {
+        var postReq = new XMLHttpRequest();
+        postReq.open('POST', './addpitcher/expense/' + this.props.id);
+        postReq.setRequestHeader('Content-Type', 'application/json');
+        postReq.send(JSON.stringify(pitcher));
+    };
     PitchBox.prototype.render = function () {
         var pitchersJsx = this.state.pitchers.map(function (p) {
             return (React.createElement(pitcher_1.Pitcher, { name: p.name, amount: p.amount }));
@@ -440,7 +505,7 @@ exports.PitchBox = PitchBox;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -475,7 +540,7 @@ exports.Pitcher = Pitcher;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -483,7 +548,7 @@ exports.Pitcher = Pitcher;
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
 var ReactDOM = __webpack_require__(6);
-var expensepage_1 = __webpack_require__(21);
+var expensepage_1 = __webpack_require__(22);
 function loadPitchData() {
     var getReq = new XMLHttpRequest();
     getReq.open("GET", "./getexpenses");
@@ -501,7 +566,7 @@ loadPitchData();
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

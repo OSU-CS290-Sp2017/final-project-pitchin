@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ExpenseList } from './expenselist';
 import { IPitchBoxModel } from '../models/IPitchBoxModel';
 import { AddExpenseModal } from './addexpensemodal';
-import { IExpense, ExpenseCategory } from '../models/IExpense'
+import { IExpense, ExpenseCategory } from '../models/IExpense';
 
 export interface IExpensePageModel {
     expenses: IExpense[];
@@ -28,6 +28,10 @@ export class ExpensePage extends React.Component<IExpensePageModel, IExpensePage
             expenses: props.expenses
         }
         document.getElementById("add-expense-button").onclick = this.toggleAddModalVisible;
+        document.getElementById("DG").onclick = () => { this.forceUpdate() };
+        document.getElementById("BM").onclick = () => { this.forceUpdate() };
+        document.getElementById("ZS").onclick = () => { this.forceUpdate() };
+        document.getElementById("CP").onclick = () => { this.forceUpdate() };
     }
 
     toggleAddModalVisible = () => {
@@ -39,13 +43,20 @@ export class ExpensePage extends React.Component<IExpensePageModel, IExpensePage
     }
 
     addExpense = (expense: IExpense) => {
-        //TODO: post back to API
         const newState = {
             ...this.state,
             expenses: [...this.state.expenses, expense],
             addModalVisible: !this.state.addModalVisible
         }
         this.setState(newState);
+        this.saveExpense(expense);
+    }
+
+    saveExpense(expense: IExpense) {
+        var postReq = new XMLHttpRequest();
+        postReq.open('POST', './addexpense');
+        postReq.setRequestHeader('Content-Type', 'application/json');
+        postReq.send(JSON.stringify(expense));
     }
 
     separateExpenses(data: IExpense[]): IExpensesSplit {

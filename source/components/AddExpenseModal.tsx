@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { IExpense, ExpenseCategory } from '../models/IExpense'
 import { SegmentButton } from './SegmentButton';
+import { Helpers } from '../helpers';
 
 interface IAddExpenseProps {
     visible: boolean;
@@ -13,12 +14,12 @@ export class AddExpenseModal extends React.Component<IAddExpenseProps, IExpense>
     constructor(props: IAddExpenseProps) {
         super(props);
         this.state = {
-            name: "Name", //TODO: read name from cookies
+            name: Helpers.getName(), //TODO: read name from cookies
             amount: 0,
             message: "",
             pitchers: [],
             category: ExpenseCategory.Utilities,
-            id: 0
+            id: -1
         }
     }
 
@@ -62,6 +63,25 @@ export class AddExpenseModal extends React.Component<IAddExpenseProps, IExpense>
         this.setState(newState);
     }
 
+    resetForm() {
+        const newState = {
+            ...this.state,
+            name: Helpers.getName(), //TODO: read name from cookies
+            amount: 0,
+            message: "",
+            category: ExpenseCategory.Utilities,
+        }
+        this.setState(newState);
+    }
+
+    onOkClicked() {
+        const newExpense = {
+            ...this.state,
+            name: Helpers.getName()
+        }
+        this.props.onSubmit(newExpense);
+    }
+
     render() {
         return (
             <div className={this.props.visible ? "modal-backdrop" : "hidden"}>
@@ -83,7 +103,11 @@ export class AddExpenseModal extends React.Component<IAddExpenseProps, IExpense>
                     </div>
                     <div className="modal-footer">
                         <button className="button" onClick={this.props.onCancel}>Cancel</button>
-                        <button className="button button-highlighted modal-button-add" onClick={() => this.props.onSubmit(this.state)}>Add</button>
+                        <button className="button button-highlighted modal-button-add" 
+                        onClick={() => {
+                            this.onOkClicked(); 
+                            this.resetForm();}
+                        }>Add</button>
                     </div>
                 </div>
             </div>
