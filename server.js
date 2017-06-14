@@ -36,7 +36,6 @@ app.get('/', function (req, res, next) {
 });
 
 app.get("/getExpenses", function(req,res,next){
-	console.log("get expenses req");
 	var new_obj = pitches.map(function(pitch){
 		var name = people.find(function(person) {
 			return person.ID == pitch.posterID;
@@ -60,6 +59,47 @@ app.get("/getExpenses", function(req,res,next){
 	res.status(200).send(JSON.stringify(new_obj));
 
 });
+
+app.get("/getpitch", function(req,res,next){
+	res.status(200).send(JSON.stringify(pitches));
+
+});
+
+app.get("/getpeople", function(req,res,next){
+	res.status(200).send(JSON.stringify(people));
+
+});
+/*
+
+for(var i = 0; i < pitches.length; i++){
+//	if(currentUser.ID = pitchArray[i].posterID){
+//			currentUser.totalSpent -= pitchArray[i].amount;
+				
+//		}
+		
+		var pi = pitches[i]
+		for(var j = 0; j < pi.contributors.length; j++){
+			currentUser.balance[pi.contributors[j].ID] += (pi.contributors.amount)/(pi.contribuors.length + 1); 	
+
+		}
+
+	else{
+		var pi = pitches[i]
+		for(var j = 0; j < pi[i].contributors.length; j++){
+			if(pi.contributors[j].ID = currentUser.ID){
+				currentUser.balance[ID] -= (pi.contributors.amount)/(pi.contribuors.length + 1); 	
+
+
+			}
+		}
+	}
+}
+*/
+	
+
+
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 

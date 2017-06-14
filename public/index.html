@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,7 @@
 		<h1 class = "title">PitchIn</h1>
 		<ul>
 			<li class = "navitem main-items navlink" ><a href = "#">Groups</a></li>
-			<li class = "navitem main-items navlink" ><a href = "#">Breakdown</a></li>
+			<li class = "navitem main-items navlink" ><a id = "dynlinkbreakdown" href = "#">Breakdown</a></li>
 
 		</ul>
 
@@ -37,10 +38,10 @@
 				<li class = "navitem">Group Name</li>
 				<li class = "navitem">Members
 					<div id= "member-container">
-						<button class = "member active">DG</button>
-						<button class = "member">BM</button>
-						<button class = "member">CP</button>
+						<button class = "member active">CP</button>
 						<button class = "member">ZS</button>
+						<button class = "member">DG</button>
+						<button class = "member">BM</button>
 					</div>
 				</li>
 			</ul>
@@ -51,6 +52,49 @@
 
 	<main class = "pitch-area" id="dynamic-pitches">
 	</main>
+
+
+
+
+    <div id="modal-backdrop" class="hidden"></div>
+    <div id="breakdown-display" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Breakdown</h3>
+          <button type="button" class="modal-close-button">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          
+		<div class="modal-elem">
+       			<h5>Total Spent</h5>
+			<p id="userOwe"></p>
+		</div>
+        	  <div class="modal-elem">
+       			<h5>People that owe you money</h5>	
+			<p id="userOwed">here</p>
+		  </div>
+		<div class = "modal-elem">
+       			<h5>People you owe money</h5>	
+			<p id="userOweToOther"></p>
+	
+		</div>
+        </div>
+	
+	
+     <!--   <div class="modal-footer">
+          <button type="button" class="modal-cancel-button">Cancel</button>
+        </div>
+-->
+      </div>
+    </div>
+
+
+
+
+
+
 
 </body>
 <script src="index.js" charset="utf-8"></script>
