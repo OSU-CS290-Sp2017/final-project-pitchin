@@ -63,96 +63,42 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 27);
+/******/ 	return __webpack_require__(__webpack_require__.s = 29);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 2:
+/******/ ([
+/* 0 */,
+/* 1 */
 /***/ (function(module, exports) {
 
 module.exports = React;
 
 /***/ }),
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */
+/***/ (function(module, exports) {
 
-/***/ 21:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(2);
-var expenselist_1 = __webpack_require__(24);
-var ExpensePage = (function (_super) {
-    __extends(ExpensePage, _super);
-    function ExpensePage() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ExpensePage.prototype.render = function () {
-        return (React.createElement("div", { className: "pitch-area" },
-            React.createElement("div", { classID: "groceries", className: "pitch-container" },
-                React.createElement(expenselist_1.ExpenseList, { expenses: this.props.groceries, name: "Groceries" })),
-            React.createElement("div", { classID: "utilities", className: "pitch-container" },
-                React.createElement(expenselist_1.ExpenseList, { expenses: this.props.utilities, name: "Utilities" })),
-            React.createElement("div", { classID: "misc", className: "pitch-container" },
-                React.createElement(expenselist_1.ExpenseList, { expenses: this.props.other, name: "Miscellaneous" }))));
-    };
-    return ExpensePage;
-}(React.Component));
-exports.ExpensePage = ExpensePage;
-
+module.exports = ReactDOM;
 
 /***/ }),
-
-/***/ 24:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(2);
-var pitchbox_1 = __webpack_require__(25);
-var ExpenseList = (function (_super) {
-    __extends(ExpenseList, _super);
-    function ExpenseList() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ExpenseList.prototype.render = function () {
-        var expensesJSX = this.props.expenses.map(function (expense) {
-            return (React.createElement(pitchbox_1.PitchBox, { name: expense.name, amount: expense.amount, pitchers: expense.pitchers, message: expense.message }));
-        });
-        return (React.createElement("div", null,
-            React.createElement("h2", { className: "breakdown-header" }, this.props.name),
-            expensesJSX));
-    };
-    return ExpenseList;
-}(React.Component));
-exports.ExpenseList = ExpenseList;
-
-
-/***/ }),
-
-/***/ 25:
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -176,8 +122,268 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(2);
-var pitcher_1 = __webpack_require__(26);
+var React = __webpack_require__(1);
+var expenselist_1 = __webpack_require__(26);
+var addexpensemodal_1 = __webpack_require__(24);
+var ExpensePage = (function (_super) {
+    __extends(ExpensePage, _super);
+    function ExpensePage(props) {
+        var _this = _super.call(this) || this;
+        _this.toggleAddModalVisible = function () {
+            var newState = __assign({}, _this.state, { addModalVisible: !_this.state.addModalVisible });
+            _this.setState(newState);
+        };
+        _this.addExpense = function (expense) {
+            //TODO: post back to API
+            var newState = __assign({}, _this.state, { expenses: _this.state.expenses.concat([expense]), addModalVisible: !_this.state.addModalVisible });
+            _this.setState(newState);
+        };
+        _this.state = {
+            addModalVisible: false,
+            expenses: props.expenses
+        };
+        document.getElementById("add-expense-button").onclick = _this.toggleAddModalVisible;
+        return _this;
+    }
+    ExpensePage.prototype.separateExpenses = function (data) {
+        var groceries = data.filter(function (expense) {
+            return expense.category == "G";
+        });
+        var misc = data.filter(function (expense) {
+            return expense.category == "M";
+        });
+        var utils = data.filter(function (expense) {
+            return expense.category == "U";
+        });
+        return {
+            groceries: groceries,
+            other: misc,
+            utilities: utils
+        };
+    };
+    ExpensePage.prototype.render = function () {
+        var splitExpenses = this.separateExpenses(this.state.expenses);
+        return (React.createElement("div", null,
+            React.createElement(addexpensemodal_1.AddExpenseModal, { onCancel: this.toggleAddModalVisible, onSubmit: this.addExpense, visible: this.state.addModalVisible }),
+            React.createElement("div", { className: "pitch-area" },
+                React.createElement("div", { classID: "groceries", className: "pitch-container" },
+                    React.createElement(expenselist_1.ExpenseList, { expenses: splitExpenses.groceries, name: "Groceries" })),
+                React.createElement("div", { classID: "utilities", className: "pitch-container" },
+                    React.createElement(expenselist_1.ExpenseList, { expenses: splitExpenses.utilities, name: "Utilities" })),
+                React.createElement("div", { classID: "misc", className: "pitch-container" },
+                    React.createElement(expenselist_1.ExpenseList, { expenses: splitExpenses.other, name: "Miscellaneous" })))));
+    };
+    return ExpensePage;
+}(React.Component));
+exports.ExpensePage = ExpensePage;
+
+
+/***/ }),
+/* 22 */,
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(1);
+var SegmentButton = (function (_super) {
+    __extends(SegmentButton, _super);
+    function SegmentButton(props) {
+        var _this = _super.call(this, props) || this;
+        _this.setSelected = function (sel) {
+            var newState = {
+                selected: sel
+            };
+            _this.setState(newState);
+            _this.props.onSelect(sel);
+        };
+        _this.state = {
+            selected: 0
+        };
+        return _this;
+    }
+    SegmentButton.prototype.render = function () {
+        var _this = this;
+        var buttonsJSX = this.props.segments.map(function (seg, idx) {
+            return (React.createElement("button", { className: "seg-button " +
+                    (idx == 0 ? "seg-button-first " : "") +
+                    (idx == _this.props.segments.length - 1 ? "seg-button-last " : "") +
+                    (idx == _this.state.selected ? "seg-button-selected " : ""), onClick: function () { return _this.setSelected(idx); } }, _this.props.segments[idx]));
+        });
+        return (React.createElement("span", null, buttonsJSX));
+    };
+    return SegmentButton;
+}(React.Component));
+exports.SegmentButton = SegmentButton;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(1);
+var IExpense_1 = __webpack_require__(30);
+var SegmentButton_1 = __webpack_require__(23);
+var AddExpenseModal = (function (_super) {
+    __extends(AddExpenseModal, _super);
+    function AddExpenseModal(props) {
+        var _this = _super.call(this, props) || this;
+        _this.setCategory = function (selected) {
+            var category;
+            switch (selected) {
+                case 0:
+                    category = IExpense_1.ExpenseCategory.Utilities;
+                    break;
+                case 1:
+                    category = IExpense_1.ExpenseCategory.Groceries;
+                    break;
+                case 2:
+                    category = IExpense_1.ExpenseCategory.Miscellaneous;
+                    break;
+                default:
+                    category = IExpense_1.ExpenseCategory.Utilities;
+                    break;
+            }
+            var newState = __assign({}, _this.state, { category: category });
+            _this.setState(newState);
+        };
+        _this.onAmountChange = function (e) {
+            var num = Math.abs(Number(e.currentTarget.value));
+            var newState = __assign({}, _this.state, { amount: num });
+            _this.setState(newState);
+        };
+        _this.onMessageChange = function (e) {
+            var newState = __assign({}, _this.state, { message: e.currentTarget.value });
+            _this.setState(newState);
+        };
+        _this.state = {
+            name: "Name",
+            amount: 0,
+            message: "",
+            pitchers: [],
+            category: IExpense_1.ExpenseCategory.Utilities
+        };
+        return _this;
+    }
+    AddExpenseModal.prototype.render = function () {
+        var _this = this;
+        return (React.createElement("div", { className: this.props.visible ? "modal-backdrop" : "hidden" },
+            React.createElement("div", { className: "modal" },
+                React.createElement("div", { className: "modal-header" }, "Add an expense"),
+                React.createElement("div", { className: "modal-main" },
+                    React.createElement("div", null,
+                        React.createElement(SegmentButton_1.SegmentButton, { onSelect: this.setCategory, segments: ['Utilities', 'Groceries', 'Miscellaneous'] })),
+                    React.createElement("div", null,
+                        "Amount: $",
+                        React.createElement("input", { className: "input-amount", type: "number", onChange: this.onAmountChange, value: this.state.amount })),
+                    React.createElement("div", null,
+                        React.createElement("input", { className: "input-message", type: "text", onChange: this.onMessageChange, value: this.state.message, placeholder: "Message..." }))),
+                React.createElement("div", { className: "modal-footer" },
+                    React.createElement("button", { className: "button", onClick: this.props.onCancel }, "Cancel"),
+                    React.createElement("button", { className: "button button-highlighted modal-button-add", onClick: function () { return _this.props.onSubmit(_this.state); } }, "Add")))));
+    };
+    return AddExpenseModal;
+}(React.Component));
+exports.AddExpenseModal = AddExpenseModal;
+
+
+/***/ }),
+/* 25 */,
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(1);
+var pitchbox_1 = __webpack_require__(27);
+var ExpenseList = (function (_super) {
+    __extends(ExpenseList, _super);
+    function ExpenseList() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ExpenseList.prototype.render = function () {
+        var expensesJSX = this.props.expenses.map(function (expense) {
+            return (React.createElement(pitchbox_1.PitchBox, { name: expense.name, amount: expense.amount, pitchers: expense.pitchers, message: expense.message }));
+        });
+        return (React.createElement("div", null,
+            React.createElement("h2", { className: "breakdown-header" }, this.props.name),
+            expensesJSX));
+    };
+    return ExpenseList;
+}(React.Component));
+exports.ExpenseList = ExpenseList;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(1);
+var pitcher_1 = __webpack_require__(28);
 var PitchBox = (function (_super) {
     __extends(PitchBox, _super);
     function PitchBox(props) {
@@ -234,8 +440,7 @@ exports.PitchBox = PitchBox;
 
 
 /***/ }),
-
-/***/ 26:
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -251,7 +456,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(2);
+var React = __webpack_require__(1);
 var Pitcher = (function (_super) {
     __extends(Pitcher, _super);
     function Pitcher() {
@@ -270,14 +475,13 @@ exports.Pitcher = Pitcher;
 
 
 /***/ }),
-
-/***/ 27:
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(2);
+var React = __webpack_require__(1);
 var ReactDOM = __webpack_require__(6);
 var expensepage_1 = __webpack_require__(21);
 function loadPitchData() {
@@ -290,36 +494,30 @@ function loadPitchData() {
 }
 function onDataLoaded(body) {
     var json = JSON.parse(body);
-    var expenses = separateExpenses(json);
-    ReactDOM.render(React.createElement(expensepage_1.ExpensePage, { groceries: expenses.groceries, utilities: expenses.utilities, other: expenses.other }), document.getElementById("dynamic-pitches"));
-}
-function separateExpenses(data) {
-    var groceries = data.filter(function (expense) {
-        return expense.category == "G";
-    });
-    var misc = data.filter(function (expense) {
-        return expense.category == "M";
-    });
-    var utils = data.filter(function (expense) {
-        return expense.category == "U";
-    });
-    return {
-        groceries: groceries,
-        other: misc,
-        utilities: utils
-    };
+    var expenses = json || [];
+    ReactDOM.render(React.createElement(expensepage_1.ExpensePage, { expenses: expenses }), document.getElementById("dynamic-pitches"));
 }
 loadPitchData();
 
 
 /***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 6:
-/***/ (function(module, exports) {
+"use strict";
 
-module.exports = ReactDOM;
+Object.defineProperty(exports, "__esModule", { value: true });
+var ExpenseCategory = (function () {
+    function ExpenseCategory() {
+    }
+    return ExpenseCategory;
+}());
+ExpenseCategory.Utilities = "U";
+ExpenseCategory.Groceries = "G";
+ExpenseCategory.Miscellaneous = "M";
+exports.ExpenseCategory = ExpenseCategory;
+
 
 /***/ })
-
-/******/ });
+/******/ ]);
 //# sourceMappingURL=index.js.map
