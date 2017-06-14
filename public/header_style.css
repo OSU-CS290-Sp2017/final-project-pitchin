@@ -82,7 +82,7 @@ ul {
 	font-size: 10px;
 }
 
-button {
+.member {
 	color: #354440;
 	background-color: #98F2E0;
 	height: 30px;
@@ -92,11 +92,15 @@ button {
 	font-size: 10px;
 }
 
+.active{
+	background-color: #74D38F;
+}
+
 button:hover {
-	background-color: #269BFA; 
-	border-color: #269BFA; 
+	/*background-color: #269BFA;*/
+	border-color: #269BFA;
 	cursor: pointer;
-	/* Implement black border for selection? */ 
+	/* Implement black border for selection? */
 
 	-webkit-transform: scale(1.05,1.07);
 	-webkit-transition-timing-function: ease-out;
