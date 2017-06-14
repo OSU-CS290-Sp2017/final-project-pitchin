@@ -61,6 +61,28 @@ app.get("/getExpenses", function(req,res,next){
 
 });
 
+//Function to add contributers to a pitch
+
+app.post('/addPitcher/expense/:expenseID', function(req, res, next) {
+
+	//var new_obj = pitchers(function(name){
+	//	return person.ID == pitch.posterID;
+	//}).name;
+	
+	var person = req.IPitcherModel.name; //gets name of pitcher
+
+	if(person){
+		var save = { //saves name of pitcher in object
+			name: string;
+		}
+		res.status(200); //successful save 
+
+	} else {
+		next(); //middleware function 
+	}
+});
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 /*
