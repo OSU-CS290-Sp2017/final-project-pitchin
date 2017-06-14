@@ -8,9 +8,6 @@ var currentuser = 0;
 function delegatedListener (event) {		//create an event listener for all things inside of our box
 	
 
-	console.log("==delegated event currentTarget:", event.currentTarget);
-	console.log("==delegated event target:", event.target);
-
 	var currElem = event.target;
 	var members = document.querySelectorAll(".member");
 
@@ -182,11 +179,7 @@ breakdown.addEventListener('click',function(){
 		document.getElementById("modal-backdrop").classList.remove("hidden");
 		document.getElementById("breakdown-display").classList.remove("hidden");
 
-		console.log("before get info");
-
 		people();
-//		var info=getInfo();
-//		displayInfo(info);
 		});
 
 
@@ -194,29 +187,11 @@ breakdown.addEventListener('click',function(){
 
 
 
-//modal functionlity//
 //exit button
 var exit = document.querySelector(".modal-close-button");
 exit.addEventListener('click', function(){
-//		document.getElementById("twit-text-input").value= "";
-//		document.getElementById("twit-attribution-input").value = "";
 		document.getElementById("modal-backdrop").classList.add("hidden");
 		document.getElementById("breakdown-display").classList.add("hidden");
 
 		})
-
-//cancel button
-
-//var exit = document.querySelector(".modal-cancel-button");
-//exit.addEventListener('click', function(){
-//		document.getElementById("twit-text-input").value = "";
-//		document.getElementById("twit-attribution-input").value = "";
-//
-//		document.getElementById("modal-backdrop").classList.add("hidden");
-//		document.getElementById("create-twit-modal").classList.add("hidden");
-//
-//		})
-//
-
-
 
