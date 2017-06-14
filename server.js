@@ -65,12 +65,12 @@ app.get("/getExpenses", function(req,res,next){
 
 app.post('/addPitcher/expense/:expenseID', function(req, res, next) {
 
-	//var new_obj = pitchers(function(name){
-	//	return person.ID == pitch.posterID;
-	//}).name;
+ /*	var new_obj = pitchers(function(name){
+		return person.ID == pitch.posterID;
+	}).name; */ 
 	
-	var person = req.IPitcherModel.name; //gets name of pitcher
-
+	var person = req.params.expenseID; //gets name of pitcher
+	//find persons id based on name passed back in post body, then save save the id as a new contributer on the expense. also find expense based on id and save the expense. 
 	if(person){
 		var save = { //saves name of pitcher in object
 			name: string;
