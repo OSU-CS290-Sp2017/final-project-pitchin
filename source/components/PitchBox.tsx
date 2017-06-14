@@ -12,6 +12,9 @@ interface IPitchBoxState {
 export class PitchBox extends React.Component<IPitchBoxModel, IPitchBoxState> {
     constructor(props: IPitchBoxModel) {
         super(props);
+        const pitchers = props.pitchers.forEach((p) => {
+            p.amount = props.amount / props.pitchers.length;
+        });
         this.state = {
             pitched: false,
             pitchers: props.pitchers,
@@ -24,10 +27,15 @@ export class PitchBox extends React.Component<IPitchBoxModel, IPitchBoxState> {
             name: "New Pitcher", //TODO: get name from cookies
             amount: this.props.amount / (this.props.pitchers.length + 1)
         };
+        var pitchers = this.state.pitchers.map((p) => {
+            p.amount = this.props.amount / (this.props.pitchers.length + 1);
+            return p;
+        });
+        pitchers = pitchers.concat(newPitcher);
         const newState = {
             ...this.state,
             pitched: true,
-            pitchers: [...this.state.pitchers, newPitcher]
+            pitchers: pitchers
         };
         this.setState(newState);
     }

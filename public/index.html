@@ -8,28 +8,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen">
 
     <link rel="stylesheet" type="text/css" href="box.css"/>
-    <link rel="stylesheet" href="style.css" />
-	<link rel= "stylesheet"  href="./header_style.css"/>
+    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="header_style.css" media="screen">
+    <!-- <link rel="stylesheet" href="box.css" media="screen"> -->
+
 
 
 <!--	media="screen">	-->
    
 </head>
 <body>
-    
+
 
 	<header>
-		<h1 class = "title">Pitch In!</h1>
+		<h1 class = "title">PitchIn</h1>
 		<ul>
-			<li class= "navitem main-items navlink" ><a href = "#">Groups</a></li>
-			<li class= "navitem main-items navlink" ><a href = "#">Breakdown</a></li>
-		
+			<li class = "navitem main-items navlink" ><a href = "#">Groups</a></li>
+			<li class = "navitem main-items navlink" ><a href = "#">Breakdown</a></li>
+
 		</ul>
 
 		<nav class = "navbar">
 			<ul class = "navlist">
 				<!-- We may want to make some of these buttons....-->
 				<li class = "navitem">
+<<<<<<< HEAD
 					<button id="add_charge">Add Charge</button>
 				</li>  
 				<li class = "navitem">
@@ -38,6 +41,13 @@
 				<li class = "navitem">
 						Members
 					<div id= "member-container" class = "navdiv" >
+=======
+					<button>Add Charge</button>
+				</li>
+				<li class = "navitem">Group Name</li>
+				<li class = "navitem">Members
+					<div id= "member-container">
+>>>>>>> 5d0af681c16ef82a39ce8f43a9fe760d14604ddd
 						<button class = "member active">DG</button>
 						<button class = "member">BM</button>
 						<button class = "member">CP</button>
@@ -50,28 +60,7 @@
 
 
 
-	<main class = "pitch-area">
-   
-
-		<div id="utilities" class= "pitch-container">Article Container
-    		
-			<article class= "pitch">A Pitch goes here</article>
-
-		</div>
-	
-		<div id= "groceries" class= "pitch-container">Groceries Container
-    
-    		<article class= "">
-       			<div id="pitchbox-example"></div>
-		</article>
-		</div>
-	
-		<div id = "misc" class= "pitch-container">Misc Container
-
-    		<article class= "pitch">A Pitch goes here</article>
-
-		</div>
-
+	<main class = "pitch-area" id="dynamic-pitches">
 	</main>
 
 </body>
