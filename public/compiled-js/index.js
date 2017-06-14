@@ -301,7 +301,7 @@ var AddExpenseModal = (function (_super) {
         var _this = this;
         return (React.createElement("div", { className: this.props.visible ? "modal-backdrop" : "hidden" },
             React.createElement("div", { className: "modal" },
-                React.createElement("div", { className: "modal-header" }, "Add an expense"),
+                React.createElement("h2", { className: "breakdown-header" }, "Add an expense"),
                 React.createElement("div", { className: "modal-main" },
                     React.createElement("div", null,
                         React.createElement(SegmentButton_1.SegmentButton, { onSelect: this.setCategory, segments: ['Utilities', 'Groceries', 'Miscellaneous'] })),

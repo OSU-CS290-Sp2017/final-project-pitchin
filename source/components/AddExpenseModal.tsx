@@ -65,9 +65,9 @@ export class AddExpenseModal extends React.Component<IAddExpenseProps, IExpense>
         return (
             <div className={this.props.visible ? "modal-backdrop" : "hidden"}>
                 <div className="modal">
-                    <div className="breakdown-header">
+                    <h2 className="breakdown-header">
                         Add an expense
-                    </div>
+                    </h2>
                     <div className="modal-main">
                         <div>
                             <SegmentButton onSelect={this.setCategory} segments={['Utilities', 'Groceries', 'Miscellaneous']}/>
