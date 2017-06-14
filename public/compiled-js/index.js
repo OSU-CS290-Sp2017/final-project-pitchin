@@ -170,12 +170,22 @@ var ExpensePage = (function (_super) {
             expenses: props.expenses
         };
         document.getElementById("add-expense-button").onclick = _this.toggleAddModalVisible;
-        document.getElementById("DG").onclick = function () { _this.forceUpdate(); };
-        document.getElementById("BM").onclick = function () { _this.forceUpdate(); };
-        document.getElementById("ZS").onclick = function () { _this.forceUpdate(); };
-        document.getElementById("CP").onclick = function () { _this.forceUpdate(); };
+        document.getElementById("DG").addEventListener('click', function () { _this.refreshPitches(); });
+        document.getElementById("BM").addEventListener('click', function () { _this.refreshPitches(); });
+        document.getElementById("ZS").addEventListener('click', function () { _this.refreshPitches(); });
+        document.getElementById("CP").addEventListener('click', function () {
+            _this.refreshPitches();
+        });
         return _this;
     }
+    ExpensePage.prototype.refreshPitches = function () {
+        var _this = this;
+        //this is terrible code, only to hook up with daniels regular js
+        setTimeout(function () {
+            var newState = __assign({}, _this.state, { expenses: _this.state.expenses.slice() });
+            _this.setState(newState);
+        }, 50);
+    };
     ExpensePage.prototype.saveExpense = function (expense) {
         var postReq = new XMLHttpRequest();
         postReq.open('POST', './addexpense');
@@ -474,6 +484,17 @@ var PitchBox = (function (_super) {
         };
         return _this;
     }
+    PitchBox.prototype.componentWillReceiveProps = function (nextProps) {
+        var pitched = false;
+        this.state.pitchers.forEach(function (p) {
+            if (p.name == helpers_1.Helpers.getName())
+                pitched = true;
+        });
+        if (this.props.name == helpers_1.Helpers.getName())
+            pitched = true;
+        var newState = __assign({}, this.state, { pitched: pitched });
+        this.setState(newState);
+    };
     PitchBox.prototype.savePitchin = function (pitcher) {
         var postReq = new XMLHttpRequest();
         postReq.open('POST', './addpitcher/expense/' + this.props.id);

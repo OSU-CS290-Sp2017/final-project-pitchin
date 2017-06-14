@@ -30,6 +30,21 @@ export class PitchBox extends React.Component<IPitchBoxModel, IPitchBoxState> {
         }
     }
 
+    componentWillReceiveProps(nextProps: IPitchBoxModel) {
+        var pitched = false;
+        this.state.pitchers.forEach((p) => {
+            if (p.name == Helpers.getName())
+                pitched = true;
+        })
+        if (this.props.name == Helpers.getName()) 
+            pitched = true;
+        const newState = {
+            ...this.state,
+            pitched: pitched
+        }
+        this.setState(newState);
+    }
+
     onPitchInClicked = () => {
         const newPitcher = {
             name: Helpers.getName(),

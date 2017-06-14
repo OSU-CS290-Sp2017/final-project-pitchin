@@ -28,10 +28,23 @@ export class ExpensePage extends React.Component<IExpensePageModel, IExpensePage
             expenses: props.expenses
         }
         document.getElementById("add-expense-button").onclick = this.toggleAddModalVisible;
-        document.getElementById("DG").onclick = () => { this.forceUpdate() };
-        document.getElementById("BM").onclick = () => { this.forceUpdate() };
-        document.getElementById("ZS").onclick = () => { this.forceUpdate() };
-        document.getElementById("CP").onclick = () => { this.forceUpdate() };
+        document.getElementById("DG").addEventListener('click', () => { this.refreshPitches() });
+        document.getElementById("BM").addEventListener('click', () => { this.refreshPitches() });
+        document.getElementById("ZS").addEventListener('click', () => { this.refreshPitches() });
+        document.getElementById("CP").addEventListener('click', () => { 
+            this.refreshPitches() 
+        });
+    }
+
+    refreshPitches() {
+        //this is terrible code, only to hook up with daniels regular js
+        setTimeout(() => {
+            const newState = {
+            ...this.state, 
+            expenses: this.state.expenses.slice()
+        };
+        this.setState(newState);
+        }, 50);
     }
 
     toggleAddModalVisible = () => {
