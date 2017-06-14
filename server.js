@@ -36,7 +36,6 @@ app.get('/', function (req, res, next) {
 });
 
 app.get("/getExpenses", function(req,res,next){
-	console.log("get expenses req");
 	var new_obj = pitches.map(function(pitch){
 		var name = people.find(function(person) {
 			return person.ID == pitch.posterID;
@@ -61,6 +60,15 @@ app.get("/getExpenses", function(req,res,next){
 
 });
 
+app.get("/getpitch", function(req,res,next){
+	res.status(200).send(JSON.stringify(pitches));
+
+});
+
+app.get("/getpeople", function(req,res,next){
+	res.status(200).send(JSON.stringify(people));
+
+});
 
 
 app.use(express.static(path.join(__dirname, 'public')));

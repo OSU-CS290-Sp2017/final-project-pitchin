@@ -1,9 +1,42 @@
 [
 	{
+		"name": "Chandler",
+		"ID": 0,
+		"totalSpent": 100,
+		"balance": [
+			{
+				"CID": 0,
+				"Money": 0
+			},
+
+			{
+				"CID": 1,
+				"Money": 0
+			},
+
+			{
+				"CID": 2,
+				"Money": 20
+			},
+			
+			{
+				"CID": 3,
+				"Money": -10
+			} 
+		]
+	},
+
+	{
 		"name": "Zoe",
 		"ID": 1,
 		"totalSpent": 100,
 		"balance": [
+			{
+				"CID": 0,
+				"Money": 0
+			},
+
+
 			{
 				"CID": 1,
 				"Money": 0
@@ -27,6 +60,12 @@
 		"totalSpent": 150,
 		"balance": [
 			{
+				"CID": 0,
+				"Money": 0
+			},
+
+
+			{
 				"CID": 1,
 				"Money": 20
 			},
@@ -49,6 +88,11 @@
 		"ID": 3,
 		"totalSpent": 80,
 		"balance": [
+			{
+				"CID": 0,
+				"Money": 0
+			},
+
 			{
 				"CID": 1,
 				"Money": 15
