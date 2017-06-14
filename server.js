@@ -69,10 +69,17 @@ app.post('/addPitcher/expense/:expenseID', function(req, res, next) {
 		return person.ID == pitch.posterID;
 	}).name; */ 
 	
-	var person = req.params.expenseID; //gets name of pitcher
-	//find persons id based on name passed back in post body, then save save the id as a new contributer on the expense. also find expense based on id and save the expense. 
-	if(person){
-		var save = { //saves name of pitcher in object
+	var expenseID  = req.params.expenseID; //gets id of new pitcher
+	var expenseData = expenseData[expenseID]; //gets related name 
+	
+
+
+	//Find persons id based on name passed back in post body. 
+	//Then save save the id as a new contributer on the expense. 
+	//Also find expense based on id and save the expense. 
+	
+	if(expenseData){
+		var templateArgs = { //saves name of pitcher in object
 			name: string;
 		}
 		res.status(200); //successful save 
