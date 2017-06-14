@@ -2,6 +2,7 @@ import * as React from "react";
 import { Pitcher } from "./pitcher";
 import { IPitcherModel } from "../models/IPitcherModel";
 import { IPitchBoxModel } from "../models/IPitchBoxModel"
+import { getName } from "../GetName";
 
 interface IPitchBoxState {
     pitched: boolean;
@@ -24,7 +25,7 @@ export class PitchBox extends React.Component<IPitchBoxModel, IPitchBoxState> {
 
     onPitchInClicked = () => {
         const newPitcher = {
-            name: "New Pitcher", //TODO: get name from cookies
+            name: getName(),
             amount: this.props.amount / (this.props.pitchers.length + 1)
         };
         var pitchers = this.state.pitchers.map((p) => {

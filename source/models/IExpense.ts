@@ -1,6 +1,7 @@
 import { IPitcherModel } from "./IPitcherModel";
 
 export interface IExpense {
+    id: number;
     name: string;
     amount: number;
     message: string;

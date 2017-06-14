@@ -17,7 +17,8 @@ export class AddExpenseModal extends React.Component<IAddExpenseProps, IExpense>
             amount: 0,
             message: "",
             pitchers: [],
-            category: ExpenseCategory.Utilities
+            category: ExpenseCategory.Utilities,
+            id: 0
         }
     }
 
