@@ -364,7 +364,7 @@ var AddExpenseModal = (function (_super) {
                         React.createElement(SegmentButton_1.SegmentButton, { onSelect: this.setCategory, segments: ['Utilities', 'Groceries', 'Miscellaneous'] })),
                     React.createElement("div", null,
                         "Amount: $",
-                        React.createElement("input", { className: "input-amount", type: "number", onChange: this.onAmountChange, value: this.state.amount })),
+                        React.createElement("input", { className: "input-amount", type: "number", onChange: this.onAmountChange })),
                     React.createElement("div", null,
                         React.createElement("input", { className: "input-message", type: "text", onChange: this.onMessageChange, value: this.state.message, placeholder: "Message..." }))),
                 React.createElement("div", { className: "modal-footer" },

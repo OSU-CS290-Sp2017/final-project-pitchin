@@ -95,7 +95,7 @@ export class AddExpenseModal extends React.Component<IAddExpenseProps, IExpense>
                         </div>
                         <div>
                             Amount: $
-                            <input className="input-amount" type="number" onChange={this.onAmountChange} value={this.state.amount}/>
+                            <input className="input-amount" type="number" onChange={this.onAmountChange} />
                         </div>
                         <div>
                             <input className="input-message" type="text" onChange={this.onMessageChange} value={this.state.message} placeholder="Message..."/>
