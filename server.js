@@ -70,20 +70,34 @@ app.post('/addPitcher/expense/:expenseID', function(req, res, next) {
 	}).name; */ 
 	
 	var expenseID  = req.params.expenseID; //gets id of new pitcher
-	var expenseData = expenseData[expenseID]; //gets related name 
+	var expenseData = people[expenseID]; //gets related name
 	
-
 
 	//Find persons id based on name passed back in post body. 
 	//Then save save the id as a new contributer on the expense. 
 	//Also find expense based on id and save the expense. 
 	
 	if(expenseData){
-		var templateArgs = { //saves name of pitcher in object
-			name: string;
+		var newContributor = {
+				name: string; 
 		}
-		res.status(200); //successful save 
-
+		var id;
+		pitches.contributors = pitches.contributors || []; 
+		people .forEach(function {
+			if(name == people.name){
+				id = people.ID; 	
+			}
+		});
+		pitches.contributors.push(id);   
+		res.status(200); //successful save
+	   	return newContributor; 	
+		fs.writeFile('pitchExamples.json', JSON.stringify(pitches), function (err){
+			if (err) {
+				res.status(500).send("Unable to save pitcher");
+			} else {
+				res.status(200).send();
+			}
+		});
 	} else {
 		next(); //middleware function 
 	}
