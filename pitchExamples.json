@@ -1,48 +1,46 @@
-{
-	"pitch1": {
-		"posterID": "1",
+[
+	{
+		"posterID": 1,
 		"category": "G",
 		"message": "Bought milk",
-		"amount": "100",
+		"amount": 100,
 		"contributors": [
 			{
-				"ID": "2"	
+				"ID": 2	
 			}, 		
 			{
-				"ID": "3"
-			}, 
+				"ID": 3
+			} 
 		]
 	},
 
-	"pitch2": {
-		"posterID": "2",
+	{
+		"posterID": 2,
 		"category": "U",
 		"message": "Paid for internet",
-		"amount": "150",
+		"amount": 150,
 		"contributors": [
 			{
-				"ID": "1"	
+				"ID": 1	
 			}, 		
 			{
-				"ID": "3"
-			}, 
+				"ID": 3
+			} 
 		]
 	}, 
 
-	"pitch3": {
-		"posterID": "3",
+	{
+		"posterID": 3,
 		"category": "M",
 		"message": "Got cool cameras for everyone",
-		"amount": "80",
+		"amount": 80,
 		"contributors": [
 			{
-				"ID": "2"	
+				"ID": 2	
 			}, 		
 			{
-				"ID": "1"
-			}, 
+				"ID": 1
+			} 
 		]
-	}, 
-
-
-} 
+	} 
+]

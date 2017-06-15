@@ -5,4 +5,5 @@ export interface IPitchBoxModel {
     amount: number;
     message: string;
     pitchers: IPitcherModel[];
+    id: number;
 }
