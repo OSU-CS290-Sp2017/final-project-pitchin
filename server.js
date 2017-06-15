@@ -126,14 +126,14 @@ app.post('/addexpense', function(req, res, next){
 			console.log("Req good?");
 
 			var id;
+			var index = 0;
 			people.forEach(function () {
-				var index = 0;
-				//console.log("in for loop");
+				console.log(people[index]);
 				if(people[index].name == req.body.name) {
 					id = people[index].ID;
 					console.log("Id is: ", id);
 				}
-				index++;
+				index = index + 1;
 			});
 
 			var newpitch = {
